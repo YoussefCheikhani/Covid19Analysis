@@ -100,7 +100,8 @@ Where dea.continent is not null
 )
 
 Select *, RollingPeopleVaccinated/Population*100 as VaccPercentage
-From PopvsVacc;
+From PopvsVacc
+Order by 7 desc
 
 -- USE CTE 2
 
@@ -113,12 +114,18 @@ From PortfolioProject..CovidDeaths$ dea
 JOIN PortfolioProject..CovidVaccinations$ vac
 	ON dea.location = vac.location
 	and dea.date = vac.date
-Where dea.continent is not null --and dea.location like '%israel%' > 100% ???
+Where dea.continent is not null --and dea.location like '%Gibraltar%' > 100% ??? Data error where population < total_vaccinations in some countries like Gibraltar & Israel
 -- Order by 2,3
 )
 
 Select *, LastPeopleVaccinated/Population*100 as LastVaccPercentage
 From LastPopvsVacc
+;
+
+--Check 
+--Select total_vaccinations,location
+--From PortfolioProject..CovidVaccinations$
+--Where location like '%Gibraltar%'
 
 
 -- USING TEMP TABLE
@@ -161,3 +168,5 @@ JOIN PortfolioProject..CovidVaccinations$ vac
 	and dea.date = vac.date
 Where dea.continent is not null
 -- Order by 2,3
+
+
